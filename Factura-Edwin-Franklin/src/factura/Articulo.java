@@ -22,18 +22,15 @@ public class Articulo {
     private float subPrecioProducto;
     private int subCantidadProducto;
     private float subTotal;
-    private int codigoProducto; //Código del producto.
-    private String nombreProducto; //Nombre del producto.
-    private String descripcionProducto; //Descripcion del producto.
-    private int cantidadProducto; // Cantidad del producto.
-    private float precioProducto; //Precio del producto.
+    private int codigoProducto; 
+    private String nombreProducto; 
+    private String descripcionProducto; 
+    private int cantidadProducto; 
+    private float precioProducto; 
 
-    //Constructor por defecto.
     public Articulo() {
     }
 
-    //Constructor para inicializar los valores de los atributos al 
-    //momento de crear un nuevo objeto.
 
     public Articulo(int codigoProducto, String nombreProducto, String descripcionProducto, int cantidadProducto, float precioProducto) {
         this.codigoProducto = codigoProducto;
@@ -144,8 +141,33 @@ public class Articulo {
     public void setPrecioProducto(float precioProducto) {   
         this.precioProducto = precioProducto;
     }
+    
+    public Object [][] arregloArticulo (){
+        Object [][] data = new Object[this.arrayListArticulo.size()][5];
+        for (int i = 0; i<this.arrayListArticulo.size();i++){
+            data[i][0] = this.arrayListArticulo.get(i).getCodigoProducto();
+            data[i][1] = this.arrayListArticulo.get(i).getNombreProducto();
+            data[i][2] = this.arrayListArticulo.get(i).getDescripcionProducto();
+            data[i][3] = this.arrayListArticulo.get(i).getPrecioProducto();
+            data[i][4] = this.arrayListArticulo.get(i).getCantidadProducto();
+        }
+        return data;
+    }
+    
+    public Object [][] arregloVenta (){
+        Object [][] data = new Object[this.arraySubTotalArticulo.size()][6];
+        for (int i = 0; i<this.arraySubTotalArticulo.size();i++){
+            data[i][0] = this.arraySubTotalArticulo.get(i).getSubCodigoProducto();
+            data[i][1] = this.arraySubTotalArticulo.get(i).getSubNombreProducto();
+            data[i][2] = this.arraySubTotalArticulo.get(i).getSubDescripcionProducto();
+            data[i][3] = this.arraySubTotalArticulo.get(i).getSubPrecioProducto();
+            data[i][4] = this.arraySubTotalArticulo.get(i).getSubCantidadProducto();
+            data[i][5] = this.arraySubTotalArticulo.get(i).getSubTotal();
+        }
+        return data;
+    }
 
-    //Método toString para imprimir la información.
+
     @Override
     public String toString() {
         return String.format("Código: %s"
@@ -194,25 +216,17 @@ public class Articulo {
         return listar;
     }
 
-   /* public int buscar_producto(int codigo) {
-        int indice = -1;
-        for (int i = 0; i < this.arrayListArticulo.size(); i++) {
-            if (codigo == this.arrayListArticulo.get(i).getCodigoProducto()) {
-                indice = i;
-                break;
-            }
-        }
-        return indice;
-    }
-*/
     public Articulo buscar_producto_objeto(int codigo) {
         Articulo productoEncontrado = null;
         for (int i = 0; i < this.arrayListArticulo.size(); i++) {
+            System.out.println(this.arrayListArticulo.get(i).getCodigoProducto());
             if (codigo == this.arrayListArticulo.get(i).getCodigoProducto()) {
+                
                 productoEncontrado = this.arrayListArticulo.get(i);
                 break;
             }
         }
+        
         return productoEncontrado;
     }
 
@@ -235,51 +249,4 @@ public class Articulo {
                 this.getPrecioProducto());
     }
 
-    /*
-    public String obtn_info_product() {
-        String infoProduct = "";
-        int i;
-        for (i = 0; i < this.InstProducto.size(); i++) {
-            infoProduct += this.InstProducto.get(i).producto_parametros() + "\n";
-        }
-        return infoProduct;
-    }
-     */
-
- /*
-    public int buscarCodProduct(int codigoProducto) {
-        int i, indiceEncontrado = -1;
-        for (i = 0; i < this.lstArticulo.size(); i++) {
-            if (this.lstArticulo.get(i).getCodigo()== codigoProducto) {
-                indiceEncontrado = i;
-                break;
-            }
-        }
-        return indiceEncontrado;
-    }
-    
-     public int obtn_ult_cod_product() {
-        int i;
-        int mayor = 0;
-        for (i = 0; i < this.lstArticulo.size(); i++) {
-            if (this.lstArticulo.get(i).getCodigo() > mayor) {
-                mayor = this.lstArticulo.get(i).getCodigo();
-            }
-        }
-        return mayor;
-    }
-    
-    public boolean agreg_produc(Articulo producto) {
-        int codigoProducto = producto.getCodigo();
-        int indiceProducto = this.buscarCodProduct(codigoProducto);
-        if (indiceProducto == -1) {
-            producto.setCodigo(this.obtn_ult_cod_product() + 1);
-            this.lstArticulo.add(producto);
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-     */
 }
